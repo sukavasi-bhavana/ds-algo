@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
+public class Solution {
+    public int CountComponents(int n, int[][] edges) {
+        int[] id=new int[n];
+        for(int i=0;i<n;i++)
+            id[i]=i;
+        foreach(var edge in edges)
+        {
+           Union(edge[0],edge[1],id) ;
+        }
+        HashSet<int> parents=new HashSet<int>();
+        for(int i=0;i<id.Length;i++)
+        {
+            parents.Add(Find(i,id));
+        }
+        
+        return parents.Count;
+        
+    }
+    public static void Union(int x,int y,int[] id)
+    {
+        int s=Find(x,id);
+        int d=Find(y,id);
+        id[d]=s;
+        
+    }
+    public static int  Find(int node,int[] id) 
+    {
+        if(id[node]!=node)
+            id[node]= Find(id[node],id);
+        return id[node];
+    }
+}
