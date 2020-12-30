@@ -1,0 +1,45 @@
+//https://leetcode.com/problems/course-schedule-ii/
+public class Solution {
+    public int[] FindOrder(int numCourses, int[][] prerequisites) {
+         int[] indegree=new int[numCourses];
+        foreach(var pre in prerequisites)
+        {
+            indegree[pre[0]]+=1;
+        }
+        HashSet<int> startSet=new HashSet<int>();
+        for(int i=0;i<numCourses;i++)
+        {
+            if(indegree[i]==0)
+                startSet.Add(i);
+        }
+        if(startSet.Count==0)
+            return new int[]{};
+        int[] res=new int[numCourses];
+        int ind=0;
+        while(startSet.Count>0){
+        foreach(var vertex in startSet.ToList())
+        {
+            res[ind++]=vertex;
+            startSet.Remove(vertex); 
+            //Console.WriteLine(vertex);
+            foreach(var pre in prerequisites)
+            {
+                if(pre[1]==vertex )
+                {
+                   indegree[pre[0]]--;                    
+                   if(indegree[pre[0]]==0)
+                       startSet.Add(pre[0]);                       
+                }
+            }
+        }
+        }
+        foreach(var v in indegree)
+        {
+            if(v!=0)
+                return new int[]{};
+        }
+        return res;     
+        
+        
+    }
+}
