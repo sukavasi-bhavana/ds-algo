@@ -1,0 +1,20 @@
+/*
+https://leetcode.com/problems/length-of-last-word/
+*/
+public class Solution {
+    public int LengthOfLastWord(string s) {
+        if(string.IsNullOrWhiteSpace(s))
+            return 0;
+        int j=s.Length-1;
+        while(s[j]==' ')
+            j--;
+        int res=0;
+        while(j>-1 && s[j]!=' ')
+        {
+            j--;
+            res++;
+        }
+        return res;
+        
+    }
+}
