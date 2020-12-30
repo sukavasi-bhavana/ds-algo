@@ -1,0 +1,35 @@
+/*
+https://leetcode.com/problems/bulls-and-cows/
+*/
+
+public string GetHint(string secret, string guess) {
+                int A=0,B=0;
+        var d=new Dictionary<int,int>();
+        for(int i=0;i<secret.Length;i++)
+        {
+           if(secret[i]==guess[i])
+              A++;
+            else 
+            {
+               if(!d.ContainsKey(secret[i]))
+                  d.Add(secret[i],1);
+                else
+                    d[secret[i]]++;       
+            }              
+        } 
+        for(int i=0;i<secret.Length;i++)            
+        {
+            if(secret[i]!=guess[i])
+            {
+                if(d.ContainsKey(guess[i]))
+                {
+                    B++;
+                    d[guess[i]]--;
+                    if(d[guess[i]]==0)
+                        d.Remove(guess[i]);
+                }
+            }
+        }
+        return $"{A}A{B}B";
+        
+    }
