@@ -1,0 +1,44 @@
+//https://leetcode.com/problems/find-largest-value-in-each-tree-row/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public IList<int> LargestValues(TreeNode root) {
+       
+        List<int> res=new List<int>();
+         //input sanitization
+        if(root==null)
+            return res;
+        
+        Queue<TreeNode> elements=new Queue<TreeNode>();
+        elements.Enqueue(root);
+        while(elements.Count>0)
+        {
+            int size=elements.Count;
+            int max=Int32.MinValue;
+            while(size>0)
+            {
+                TreeNode cur=elements.Dequeue();
+                max=Math.Max(cur.val,max);
+                               
+                if(cur.left!=null)
+                    elements.Enqueue(cur.left);
+                if(cur.right!=null)
+                    elements.Enqueue(cur.right);
+                size--;
+            }
+            res.Add(max);
+        }
+        return res;
+    }
+}
