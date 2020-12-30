@@ -1,0 +1,67 @@
+/*
+https://leetcode.com/problems/reverse-linked-list-ii/
+*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode ReverseBetween(ListNode head, int m, int n) {
+        if(m==n||head==null)
+            return head;
+        int i=1;
+        var cur=head;
+        ListNode shead=null,mhead=null,nhead=null;
+        ;
+        if(m==1)
+            mhead=cur;
+        while(cur!=null)
+        {
+            Console.WriteLine(cur.val);
+            if(i==m-1&&m>1)
+                shead=cur;
+            
+            if(cur.next!=null)
+                cur=cur.next;
+            i++;
+            if(i==m){
+                mhead=cur;
+                //Console.WriteLine(mhead.val);
+                
+            }
+            if(i==n){
+                    nhead=cur;
+                //Console.WriteLine(nhead.val);
+                break;
+            }
+        }
+        Console.WriteLine(mhead.val);
+        var end=nhead.next;
+        var mcur=mhead;
+        int j=n-m+1;
+        while(mcur!=null&& j>0)
+        {
+            Console.WriteLine(mcur.val);
+            var temp=mcur.next;
+            mcur.next=end;
+            end=mcur;
+            mcur=temp;
+            
+            j--;
+        }
+    // Console.WriteLine(mcur.val);
+        if(m!=1)
+           shead.next=end;
+        else
+            head=end;
+        return head;
+        
+    }
+}
