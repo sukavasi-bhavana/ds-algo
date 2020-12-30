@@ -1,0 +1,20 @@
+/*
+https://leetcode.com/problems/count-negative-numbers-in-a-sorted-matrix/
+*/
+public int CountNegatives(int[][] grid) {
+        int count=0;
+        int i,j;
+       
+        for(i=grid.Length-1;i>=0;i--)
+        {
+            for(j=grid[i].Length-1;j>=0;j--)
+            {
+                if(grid[i][j]<0)
+                    count++;
+                else
+                    break;
+            }
+        }
+        return count;
+        
+    }
