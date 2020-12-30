@@ -1,0 +1,28 @@
+/*https://leetcode.com/problems/top-k-frequent-words/
+*/
+
+public IList<string> TopKFrequent(string[] words, int k) {
+        List<string> res =new List<string>();
+        if(words==null|| words.Length==0)
+            return res;
+        var wordCount=new Dictionary<string,int>();
+        foreach(var word in words)
+        {
+            if(!wordCount.ContainsKey(word))
+                wordCount.Add(word,1);
+            else
+                wordCount[word]+=1;            
+        }
+        var items = from pair in wordCount
+                    orderby pair.Value descending, pair.Key ascending
+                    select pair;
+
+        int i = 0;
+        foreach(var item in items){
+            i++;
+            if (i <= k) { res.Add(item.Key); }
+        }
+
+        return res;
+        
+    }
