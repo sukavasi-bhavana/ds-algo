@@ -1,0 +1,42 @@
+//https://leetcode.com/problems/number-of-distinct-islands/
+public class Solution {
+    public int NumDistinctIslands(int[][] grid) {
+        if(grid==null||grid.Length==0)
+            return 0;
+        
+        bool[,] visited=new bool[grid.Length,grid[0].Length];
+        HashSet<string> direction=new HashSet<string>();
+        for(int i=0;i<grid.Length;i++)
+        {
+            for(int j=0;j<grid[0].Length;j++)
+            {
+                if(grid[i][j]==0 || visited[i,j]==true)
+                    continue;
+                string str=VisitAdjacent(grid,visited,i,j,"");
+                Console.WriteLine(str);
+                direction.Add(str);
+            }
+        }
+        return direction.Count;       
+        
+    }
+    public string VisitAdjacent(int[][] grid,bool[,] visited,int i,int j,string key)
+    {
+        if(i<0||j<0||i>=grid.Length||j>=grid[0].Length||visited[i,j]==true || grid[i][j]==0)
+            return "v";
+        visited[i,j]=true;
+        StringBuilder newret=new StringBuilder("");
+        newret.Append(key);
+        
+        string bret=VisitAdjacent(grid,visited,i+1,j,"b");
+        newret.Append(bret);
+        string uret= VisitAdjacent(grid,visited,i-1,j,"u");
+        newret.Append(uret);
+        string rret=VisitAdjacent(grid,visited,i,j+1,"r");
+        newret.Append(rret);
+        string lret=VisitAdjacent(grid,visited,i,j-1,"l");
+        newret.Append(lret);
+        return newret.ToString();
+    }
+
+}
