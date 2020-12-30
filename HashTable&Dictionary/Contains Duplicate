@@ -1,0 +1,19 @@
+/*
+https://leetcode.com/problems/contains-duplicate/
+*/
+public bool ContainsDuplicate(int[] a) {
+            int i;
+         if(a.Length==0||a.Length==1)
+             return false;
+        else{
+            Dictionary<int,int> dict=new Dictionary<int, int>();
+            for(i=0;i<a.Length;i++)
+                {
+                if(!dict.ContainsKey(a[i]))
+                    dict.Add(a[i],1);
+                else
+                    return true;
+            }
+            return false;
+        }
+    }
