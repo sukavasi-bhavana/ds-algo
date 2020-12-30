@@ -1,0 +1,46 @@
+/*
+https://leetcode.com/problems/3sum/
+*/
+ public IList<IList<int>> ThreeSum(int[] nums) {      
+        
+        IList<IList<int>> res=new List<IList<int>>();
+        if(nums.Length<3 || nums==null)
+            return res;
+        Array.Sort(nums);
+        for(int i=0;i<nums.Length-2;i++)
+        {
+            int left=i+1;
+            int right=nums.Length-1;
+            while(left<right)
+            {
+                int sum=nums[i]+nums[right]+nums[left];
+                if(sum==0)
+                {
+                    List<int> l=new List<int>();
+                    l.Add(nums[i]);
+                    l.Add(nums[left]);
+                    l.Add(nums[right]);
+                    left++;
+                    right--;
+                    res.Add(l);
+                    //int leftValue=nums[left];
+                    while(left<right && nums[left-1]==nums[left])
+                    {
+                        left++;   
+                    }
+                    //int rightValue=nums[right];
+                    while(left<right && nums[right+1]==nums[right])
+                    {
+                        right--;
+                    }
+                }
+                else if(sum<0)
+                    left++;
+                else
+                    right--;
+            }
+            while(i<nums.Length-2 && nums[i]==nums[i+1])
+                i++;
+        }
+        return res;
+    }
