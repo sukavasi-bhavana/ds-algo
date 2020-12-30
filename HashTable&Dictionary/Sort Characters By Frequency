@@ -1,0 +1,22 @@
+/*
+https://leetcode.com/problems/sort-characters-by-frequency/
+*/
+
+ public string FrequencySort(string s) {
+        StringBuilder sb=new StringBuilder();
+        Dictionary<char,int> d=new Dictionary<char,int>();
+        for(int i=0;i<s.Length;i++)
+        {
+            if(!d.ContainsKey(s[i]))
+                d.Add(s[i],1);
+            else
+                d[s[i]]+=1;
+        }
+         var result= d.OrderByDescending(i => i.Value);
+        foreach(var v in result){
+            sb.Append(v.Key,v.Value);
+        //Console.WriteLine(v.Value);
+        }
+        return sb.ToString();  
+        
+    }
