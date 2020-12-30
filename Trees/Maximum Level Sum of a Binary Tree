@@ -1,0 +1,56 @@
+//https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public int MaxLevelSum(TreeNode root) {
+        if(root==null)
+            return 0;
+        Queue<TreeNode> q=new Queue<TreeNode>();
+        q.Enqueue(root);
+        int maxSum=Int32.MinValue;
+        int res=0;
+        int level=0;
+        while(q.Count>0){
+            int size=q.Count;
+            int levelsum=0;
+            
+            while(size>0)
+            {
+                TreeNode cur=q.Dequeue();
+                if(cur.left!=null)
+                    q.Enqueue(cur.left);
+                if(cur.right!=null)
+                    q.Enqueue(cur.right);
+                levelsum=levelsum+cur.val;
+                 
+                size--;
+            }
+            // Console.WriteLine(levelsum);
+             //Console.WriteLine(maxSum);
+            level=level+1;
+            
+            if(levelsum>maxSum)
+            {
+              
+                maxSum=levelsum;
+                res=level;
+               // Console.WriteLine(level);
+                
+            }          
+            
+        }
+        return res;
+    }
+}
