@@ -1,0 +1,28 @@
+/*
+https://leetcode.com/problems/uncommon-words-from-two-sentences/
+*/
+public string[] UncommonFromSentences(string A, string B) {
+    string AB =string.Concat(A,' ' ,B);
+            string[] spliAB = AB.Split(null);
+
+            Dictionary<string, int> d = new Dictionary<string, int>();
+            for( int i=0;i<spliAB.Length;i++)
+            {
+                if(!d.ContainsKey(spliAB[i]))
+                {
+                    d.Add(spliAB[i], 1);
+                }
+                else
+                {
+                    d[spliAB[i]] += 1; 
+                }
+            }
+          List<string> l = new List<string>();
+            foreach(KeyValuePair<string,int> s in d)
+            {
+                if (s.Value == 1)
+                    l.Add(s.Key);
+            }
+            string[] si = l.ToArray();  
+        return si;
+    }
