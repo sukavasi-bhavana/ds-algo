@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/valid-parentheses/
+public class Solution {
+    public bool IsValid(string str) {
+      var s=new Stack<char>();
+        Dictionary<char,char> d=new Dictionary<char,char>();
+        d.Add(')','(');
+        d.Add(']','[');
+        d.Add('}','{');
+        foreach(char c in str)
+        {
+            if(c=='(' || c=='[' || c=='{')
+                s.Push(c);
+            else
+            {
+                if(s.Count==0)
+                    return false;
+                else
+                {
+                    if(d[c]!=s.Peek())
+                        return false;
+                    else
+                        s.Pop();
+                }
+            }
+        }
+        return s.Count==0;
+        
+    }
+}
