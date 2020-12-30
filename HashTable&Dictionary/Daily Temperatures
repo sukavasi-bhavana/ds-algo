@@ -1,0 +1,20 @@
+/*
+https://leetcode.com/problems/daily-temperatures/
+*/
+ public int[] DailyTemperatures(int[] T) {
+        int[] res=new int[T.Length];
+        Array.Fill(res,0);
+        
+        for(int i=0;i<T.Length;i++)
+        {
+            for(int j=i+1;j<T.Length;j++)
+            {
+                if(T[j]>T[i]){
+                    res[i]=j-i;
+                    //Console.WriteLine(res[i]);
+                    break;
+                }
+            }                        
+        }
+        return res;
+    }
