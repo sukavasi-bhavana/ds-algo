@@ -1,0 +1,49 @@
+//https://leetcode.com/problems/min-stack/
+public class MinStack {
+
+    /** initialize your data structure here. */
+    Stack<int> obj;
+        Stack<int> trackmin;
+    
+    public MinStack() {
+        obj=new Stack<int>();
+        trackmin=new Stack<int>();
+    }
+    
+    public void Push(int x) {
+        obj.Push(x);
+        if(trackmin.Count()==0)        
+            trackmin.Push(x);
+        else
+        {
+            if(trackmin.Peek()>x)
+                trackmin.Push(x);
+            else
+                trackmin.Push(trackmin.Peek());
+        }
+    }
+    
+    public void Pop() {
+        obj.Pop();
+        trackmin.Pop();
+        
+    }
+    
+    public int Top() {
+        return obj.Peek();
+    }
+    
+    public int GetMin() {
+        return trackmin.Peek();
+        
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.Push(x);
+ * obj.Pop();
+ * int param_3 = obj.Top();
+ * int param_4 = obj.GetMin();
+ */
