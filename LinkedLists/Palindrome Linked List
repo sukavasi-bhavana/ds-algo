@@ -1,0 +1,76 @@
+/*
+https://leetcode.com/problems/palindrome-linked-list/
+*/
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    public bool IsPalindrome(ListNode head) {
+        if(head==null || head.next==null)
+            return true;
+        ListNode slow = head, fast = head;
+        int counter=1;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            if(fast.next!=null)
+                counter++;
+            if(fast.next.next!=null)
+                counter++;
+            fast = fast.next.next;
+            
+        } 
+        
+        ListNode cur=head;
+        if(counter%2!=0)
+        {
+            slow=slow.next;            
+            slow=reverseLinkedList(slow);    
+           
+            while(slow!=null)
+            {
+                if(cur.val!=slow.val)
+                    return false;
+                slow=slow.next;
+                cur=cur.next;
+            }
+            return true;
+        }
+        else
+        {
+            slow=reverseLinkedList(slow);
+            while(slow!=null)
+            {
+                
+                if(cur.val!=slow.val)
+                {                  
+                    return false;
+                }
+                slow=slow.next;
+                cur=cur.next;
+            }
+            return true; 
+        }
+    }
+    public static  ListNode reverseLinkedList(ListNode head)
+    {
+        ListNode cur=head, later=null;
+        while(head!=null)
+        {
+            head=head.next;
+            cur.next=later;
+            later=cur;
+            cur=head;
+        }
+        return later;
+    
+    }
+    
+}
