@@ -1,0 +1,64 @@
+//https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public int SumEvenGrandparent(TreeNode root) {
+        if(root==null)
+            return 0;
+        Queue<TreeNode> q=new Queue<TreeNode>();
+        q.Enqueue(root);
+        int res=0;
+        while(q.Count>0)            
+        {
+            int size=q.Count;
+
+            while(size>0){
+                var cur=q.Dequeue();
+                //Console.WriteLine(cur.val);
+                if(cur.val%2==0)
+                {
+                    //Console.WriteLine(cur.val);
+                    if(cur.left!=null){
+                        res=res+GrandKids(cur.left);
+                       // q.Enqueue(cur.left);                                            
+                      }
+                    if(cur.right!=null){
+                         res=res+GrandKids(cur.right);
+                        
+                        //q.Enqueue(cur.right);
+                    }
+                 }
+               
+                    if(cur.left!=null)
+                        q.Enqueue(cur.left);
+                    if(cur.right!=null)
+                        q.Enqueue(cur.right);                        
+                
+                size--;            
+             }            
+        }
+        return res;       
+    }
+    public int GrandKids(TreeNode x)
+    {
+        int sum=0;
+        //Console.WriteLine(x.val);
+        if(x.left!=null)
+            sum=sum+x.left.val;
+        if(x.right!=null)
+            sum=sum+x.right.val;
+        return sum;
+    }
+}
