@@ -1,0 +1,16 @@
+/*
+https://leetcode.com/problems/find-the-duplicate-number/
+*/
+public class Solution {
+    public int FindDuplicate(int[] nums) {
+        if(nums.Length == 1) return nums[0];
+        var set = new HashSet<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (!set.Contains(nums[i])) set.Add(nums[i]);
+                else return nums[i];
+            }
+
+            return -1;
+    }
+}
